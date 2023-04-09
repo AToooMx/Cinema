@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.thymeleaf.org "
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<div th:fragment="navbar">
+	<nav class="MainMenu">
+		<ul>
+			<li><a href="/movies">Зараз в кіно</a></li>
+			<li><a href="/soon">Скоро у прокаті</a></li>
+			<li><a href="/help">Допомога</a></li>
+			<li sec:authorize="isAnonymous()">
+				<a href="/login">Вхід</a>
+				<ul class=" text-center">
+				 	<li class="border border-success"><a href="/registration">Реєстрація</a></li>
+				</ul>
+			</li>
+			<li sec:authorize="isAuthenticated()"><a href="/account/">Мій кабінет</a>
+				<ul class=" text-center">
+					<li class="border border-success"><a href="/account/history">Історія візитів</a></li>
+					<li class="border border-success"><a href="/account/changePassword">Змінити пароль</a></li>
+					<li class="border border-success"><a th:href="@{/logout}">Вихід</a></li>
+				</ul>
+			</li>
+		</ul>
+	</nav>
+</div>

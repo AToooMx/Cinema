@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.thymeleaf.org ">
+<head>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<link th:href="@{/styles/css/style.css}" rel="stylesheet" />
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<meta charset="UTF-8">
+<title>Реєстрація</title>
+</head>
+<body class="noselect mybody">
+	<div th:insert="/nav::navbar"></div>
+
+	<div
+		class="bg-light bg-gradient p-3 col-4 mt-5 rounded container text-center border shadow-lg">
+		<form method="POST" th:action="@{/process-registration}">
+			<div class="form-group m-2">
+				<input type="email" name="email" class="form-control"
+					placeholder="E-mail (Обов'язково)" required autofocus />
+			</div>
+			<div class="row">
+				<div class="form-group m-2 col">
+					<input type="text" name="name" class="form-control"
+						placeholder="Ім'я (Обов'язково)" required autofocus />
+				</div>
+				<div class="form-group m-2 col">
+					<input type="text" name="surname" class="form-control"
+						placeholder="Прізвище (Обов'язково)" required autofocus />
+				</div>
+			</div>
+			<div class="form-group m-2">
+				<input type="text" name="phone" class="form-control"
+					placeholder="Номер телефону (необов'язково)" />
+			</div>
+			<div class="form-group m-2">
+				<input type="password" name="password" class="form-control"
+					placeholder="Пароль (Обов'язково)" required />
+			</div>
+			<div class="form-group m-2">
+				<input type="submit" value="Зарєструватись" class="btn btn-primary" />
+			</div>
+		</form>
+	</div>
+
+	<div
+		class="bg-light bg-gradient p-2 col-4 mt-2 rounded container text-center border shadow-lg"
+		th:if="${param.formError}">
+		<span class="text-danger">Помилка відправлення форми. Перевірте
+			введені дані та спробуйте повторно</span>
+	</div>
+	<div
+		class="bg-light bg-gradient p-2 col-4 mt-2 rounded container text-center border shadow-lg"
+		th:if="${param.emailError}">
+		<span class="text-danger">Користувач з таким E-mail вже існує</span>
+	</div>
+</body>
+</html>
