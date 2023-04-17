@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 
 import com.clevercinema.dao.CommentDao;
 import com.clevercinema.model.Comment;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
 @Service
 public class CommentServiceImpl implements CommentService {
 

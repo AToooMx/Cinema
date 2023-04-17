@@ -11,7 +11,9 @@ import org.springframework.stereotype.Service;
 
 import com.clevercinema.dao.SeanceDao;
 import com.clevercinema.model.Seance;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
 @Service
 public class SeanceServiceImpl implements SeanceService {
 

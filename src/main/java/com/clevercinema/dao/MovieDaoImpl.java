@@ -37,7 +37,7 @@ public class MovieDaoImpl implements MovieDao {
 	public List<Movie> getSoonMovieList() {
 
 		Date today = new Date();
-		String sql = "SELECT MovieID as 'id', movie_title as 'title', Photo_Name as 'photoName' FROM Movie WHERE Start_Rental > ?";
+		String sql = "SELECT MovieID as 'id', movie_title as 'title', Photo_Name as 'photoName', description FROM Movie WHERE Start_Rental > ?";
 		Object[] args = { today };
 
 		List<Movie> movies = template.query(sql, new BeanPropertyRowMapper<Movie>(Movie.class), args);
@@ -48,7 +48,7 @@ public class MovieDaoImpl implements MovieDao {
 	@Override
 	public Movie findMovieById(int id) {
 
-		String sql = "SELECT MovieID, Movie_Title, Original_Title, filmagelimit.age, filmlanguage.language, Start_Rental, End_Rental, duration, photo_name, trailer FROM movie inner join filmlanguage on ID_Language = LanguageID inner join filmagelimit on id_age = ageId WHERE MovieID = ?";
+		String sql = "SELECT MovieID, Movie_Title, Original_Title, filmagelimit.age, filmlanguage.language, Start_Rental, End_Rental, duration, photo_name, trailer, description FROM movie inner join filmlanguage on ID_Language = LanguageID inner join filmagelimit on id_age = ageId WHERE MovieID = ?";
 
 		Movie movie = template.queryForObject(sql, new MovieRowMapper(), id);
 

@@ -25,6 +25,7 @@ public class MovieRowMapper implements RowMapper<Movie> {
 			movie.setDuration(rs.getInt("duration"));
 			movie.setPhotoName(rs.getString("photo_name"));
 			movie.setTrailer(rs.getString("trailer"));
+			movie.setDescription(rs.getString("description"));
 			return movie;
 		}
 		// System.out.println(movie);

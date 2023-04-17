@@ -23,7 +23,7 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests
                         (auth -> auth
-                         .antMatchers("/admin").hasAuthority("ADMIN") 
+                         .antMatchers("/admin").hasAuthority("ROLE_ADMIN") 
                          .antMatchers("/login", "/registration", "/process-registration").permitAll()	 
                          .antMatchers("/movies/movie/add-comment-process").authenticated() //Додавати коментарі може тільки авторизований користувач
                          .antMatchers("/account", "/account/**").authenticated()

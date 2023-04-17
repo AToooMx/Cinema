@@ -17,11 +17,12 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.clevercinema.entity.Users;
 import com.clevercinema.model.Comment;
 import com.clevercinema.model.Movie;
 import com.clevercinema.model.Seance;
-import com.clevercinema.model.Users;
 import com.clevercinema.repository.UserRepository;
 import com.clevercinema.services.CommentService;
 import com.clevercinema.services.MovieService;
@@ -67,7 +68,7 @@ public class MovieController {
 		if (result.hasErrors()) {
 			return "redirect:/movies/movie?movieId=" + comment.getIdMovie() + "&?emptyTextArea";
 		}
-		
+		System.out.println(comment.getInfo());
 		Users user = userRepository.findByEmail(authentication.getName());
 		comment.setIdUser(user.getId());
 		commentService.saveComment(comment);
@@ -78,6 +79,6 @@ public class MovieController {
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		StringTrimmerEditor editor = new StringTrimmerEditor(true);
-		binder.registerCustomEditor(String.class, "text", editor);
+		binder.registerCustomEditor(String.class, "info", editor);
 	}
 }

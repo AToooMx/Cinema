@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.clevercinema.dto.ChangePasswordDto;
-import com.clevercinema.model.Users;
+import com.clevercinema.entity.Users;
 import com.clevercinema.repository.UserRepository;
 
 @Controller

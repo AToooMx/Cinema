@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 
 import com.clevercinema.dao.MovieDao;
 import com.clevercinema.model.Movie;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
 @Service
 public class MovieServiceImpl implements MovieService {
 

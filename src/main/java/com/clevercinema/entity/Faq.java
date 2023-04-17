@@ -1,4 +1,4 @@
-package com.clevercinema.model;
+package com.clevercinema.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

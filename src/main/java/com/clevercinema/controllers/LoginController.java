@@ -1,9 +1,12 @@
 package com.clevercinema.controllers;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 import javax.validation.Valid;
 
+import com.clevercinema.entity.Authorities;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.security.core.Authentication;
@@ -15,7 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.clevercinema.model.Users;
+import com.clevercinema.entity.Users;
 import com.clevercinema.repository.UserRepository;
 
 @Controller
@@ -54,8 +57,7 @@ public class LoginController {
 		if (userRepository.findByEmail(user.getEmail()) != null) {
 			return "redirect:/registration?emailError";
 		}
-
-		user.setRole("ROLE_USER");
+		user.setAuthorities(Set.of(new Authorities("ROLE_USER")));
 		user.setEnabled(true);
 		user.setPassword(encoder.encode(user.getPassword()));
 		user.setDateChange(new Date());
@@ -64,7 +66,7 @@ public class LoginController {
 
 		return "redirect:/login?registerSuccess";
 	}
-	
+
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		StringTrimmerEditor editor = new StringTrimmerEditor(true);

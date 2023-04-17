@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.clevercinema.model.Faq;
+import com.clevercinema.entity.Faq;
 import com.clevercinema.model.Movie;
 import com.clevercinema.services.FAQService;
 import com.clevercinema.services.MovieService;

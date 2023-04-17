@@ -8,7 +8,7 @@ public class Comment {
 	private int idMovie;
 	private int idUser;
 	@NotEmpty
-	private String text;
+	private String info;
 	private String publicationDate;
 	private boolean isHidden = false;
 	private String name;
@@ -17,11 +17,11 @@ public class Comment {
 
 	}
 
-	public Comment(int id, int idMovie, int idUser, String text, String publicationDate, boolean isHidden, String name) {
+	public Comment(int id, int idMovie, int idUser, String info, String publicationDate, boolean isHidden, String name) {
 		this.id = id;
 		this.idMovie = idMovie;
 		this.idUser = idUser;
-		this.text = text;
+		this.info = info;
 		this.publicationDate = publicationDate;
 		this.isHidden = isHidden;
 		this.name = name;
@@ -43,12 +43,12 @@ public class Comment {
 		this.idMovie = idMovie;
 	}
 
-	public String getText() {
-		return text;
+	public String getInfo() {
+		return info;
 	}
 
-	public void setText(String text) {
-		this.text = text;
+	public void setInfo(String info) {
+		this.info = info;
 	}
 
 	public String getPublicationDate() {
@@ -85,7 +85,7 @@ public class Comment {
 
 	@Override
 	public String toString() {
-		return "Comment [id=" + id + ", idMovie=" + idMovie + ", idUser=" + idUser + ", text=" + text
+		return "Comment [id=" + id + ", idMovie=" + idMovie + ", idUser=" + idUser + ", info=" + info
 				+ ", publicationDate=" + publicationDate + ", isHidden=" + isHidden + ", name=" + name + "]";
 	}
 

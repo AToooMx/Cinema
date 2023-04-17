@@ -6,8 +6,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.clevercinema.model.MyUserDetails;
-import com.clevercinema.model.Users;
+import com.clevercinema.entity.Users;
 import com.clevercinema.repository.UserRepository;
 
 @Service
@@ -23,6 +22,7 @@ public class UserDetailService implements UserDetailsService {
 		if (user == null) {
 			throw new UsernameNotFoundException("Email not found: " + email);
 		} else {
+
 			MyUserDetails userDetails = new MyUserDetails(user);
 			return userDetails;
 		}

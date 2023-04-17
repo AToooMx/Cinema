@@ -16,24 +16,11 @@ public class Movie {
 	private int duration;
 	private String photoName;
 	private String trailer;
+	private String description;
 	private List<Genre> genres;
 	private List<Producer> producers;
 	private List<Studio> studios;
 	private List<Country> countries;
-
-	public Movie(int id, String title, String originalTitle, int age, String language, Date startRental, Date endRental,
-			int duration, String photoName, String trailer) {
-		this.id = id;
-		this.title = title;
-		this.originalTitle = originalTitle;
-		this.age = age;
-		this.language = language;
-		this.startRental = startRental;
-		this.endRental = endRental;
-		this.duration = duration;
-		this.photoName = photoName;
-		this.trailer = trailer;
-	}
 
 	public Movie() {
 
@@ -165,6 +152,14 @@ public class Movie {
 		return "Movie [id=" + id + ", title=" + title + ", originalTitle=" + originalTitle + ", age=" + age
 				+ ", language=" + language + ", startRental=" + startRental + ", endRental=" + endRental + ", duration="
 				+ duration + ", photoName=" + photoName + ", trailer=" + trailer + "]";
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 }

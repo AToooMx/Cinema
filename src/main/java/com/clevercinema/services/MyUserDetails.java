@@ -1,12 +1,16 @@
-package com.clevercinema.model;
+package com.clevercinema.services;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
+import com.clevercinema.entity.Authorities;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import com.clevercinema.entity.Users;
 
 public class MyUserDetails implements UserDetails {
 
@@ -32,13 +36,13 @@ public class MyUserDetails implements UserDetails {
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 
 		List<GrantedAuthority> roleList = new ArrayList<>();
-		String[] roles = user.getRole().split(",");
+		Set<Authorities> authorities = user.getAuthorities();
 
-		for (String role : roles) {
-			SimpleGrantedAuthority authority = new SimpleGrantedAuthority(role);
+		for (Authorities role : authorities) {
+			SimpleGrantedAuthority authority = new SimpleGrantedAuthority(role.getAuthority().trim());
 			roleList.add(authority);
 		}
-
+		System.out.println(user.getAuthorities());
 		return roleList;
 	}
 
