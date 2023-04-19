@@ -15,33 +15,27 @@
 <body class="noselect mybody">
 	<div th:insert="/nav::navbar"></div>
 	<div
-		class="bg-light bg-gradient p-3 col-2 mt-5 rounded container text-center border shadow-lg">
+		class="bg-light bg-gradient p-3 col-2 mt-5 rounded container border shadow-lg">
 		<form method="POST" th:action="@{/process-login}">
 			<div class="form-group m-2">
-				<input type="email" name="email" class="form-control"
-					placeholder="E-mail" required autofocus />
+				<label class="text-danger ps-1" th:if="${param.error}">Email</label>
+				<label class="text-dark ps-1" th:unless="${param.error}">Email</label>
+				<input type="text" name="email" class="form-control"
+					placeholder="E-mail" autofocus />
 			</div>
 			<div class="form-group m-2">
+				<label class="text-danger ps-1" th:if="${param.error}">Пароль</label>
+				<label class="text-dark  ps-1" th:unless="${param.error}">Пароль</label>
 				<input type="password" name="password" class="form-control"
-					placeholder="Пароль" required />
+					placeholder="Пароль" />
 			</div>
-			<div class="form-group m-2">
+			<div class="form-group m-2 text-center">
 				<input type="submit" value="Увійти" class="btn btn-primary" />
 			</div>
+			<div class="text-success" th:if="${param.registerSuccess}">
+				<span class="text-success">Реєстрація виконана успішно</span>
+			</div>
 		</form>
-	</div>
-
-	<div
-		class="bg-light bg-gradient p-2 col-2 mt-2 rounded container text-center border shadow-lg"
-		th:if="${param.error}">
-		<span class="text-danger">Неправильний логін або пароль</span>
-	</div>
-
-	<div
-		class="bg-light bg-gradient p-2 col-4 mt-2 rounded container text-center border shadow-lg"
-		th:if="${param.registerSuccess}">
-		<span class="text-success">Реєстрація виконана успішно.
-			Увійдіть в свій обліковий запис.</span>
 	</div>
 </body>
 </html>

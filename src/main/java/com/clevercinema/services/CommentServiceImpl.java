@@ -23,7 +23,7 @@ public class CommentServiceImpl implements CommentService {
 
 		return commentDao.findAllByIdMovie(idMovie);
 	}
-
+	@Transactional
 	@Override
 	public void saveComment(Comment comment) {
 

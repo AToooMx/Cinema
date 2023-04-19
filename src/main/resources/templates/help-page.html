@@ -14,9 +14,9 @@
 </head>
 <body class="noselect mybody">
 	<div th:insert="/nav::navbar"></div>
-	<div class="mb-5 container">
+	<div class="container rounded mt-3 mb-5 col-6">
 		<div th:each="FAQ : ${FAQs}">
-			<div class="wrapperHelp">
+			<div class="bg-container-color bg-border rounded mb-3">
 				<div class="m-2 b">
 					<div class="titleHelp border-bottom">
 						<span class="text-danger h4" th:text="${FAQ.question}"></span>

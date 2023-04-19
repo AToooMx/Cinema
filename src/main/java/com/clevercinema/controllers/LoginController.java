@@ -1,33 +1,27 @@
 package com.clevercinema.controllers;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
-
 import javax.validation.Valid;
 
-import com.clevercinema.entity.Authorities;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.clevercinema.entity.Users;
-import com.clevercinema.repository.UserRepository;
+import com.clevercinema.dto.RegisterDto;
+import com.clevercinema.services.UserService;
 
 @Controller
 public class LoginController {
 
 	@Autowired
-	private UserRepository userRepository;
-	@Autowired
-	private PasswordEncoder encoder;
+	private UserService UserService;
 
 	@GetMapping("/login")
 	public String showLoginPage(Authentication authentication) {
@@ -37,13 +31,15 @@ public class LoginController {
 	}
 
 	@GetMapping("/registration")
-	public String showRegistrationPage(Authentication authentication) {
+	public String showRegistrationPage(Model model, Authentication authentication) {
+
+		model.addAttribute("user", new RegisterDto());
 
 		return authentication != null ? "redirect:/movies" : "registration-page";
 	}
 
 	@PostMapping("/process-registration")
-	public String processRegistration(@Valid Users user, BindingResult result, Authentication authentication) {
+	public String processRegistration(@Valid @ModelAttribute("user") RegisterDto userDto, BindingResult result, Authentication authentication) {
 
 		if (authentication != null) {
 			return "redirect:/movies";
@@ -51,20 +47,14 @@ public class LoginController {
 
 		if (result.hasErrors()) {
 
-			return "redirect:/registration?formError";
+			return "registration-page";
 		}
 
-		if (userRepository.findByEmail(user.getEmail()) != null) {
+		if (!UserService.save(userDto)) {
 			return "redirect:/registration?emailError";
+		} else {
+			return "redirect:/login?registerSuccess";
 		}
-		user.setAuthorities(Set.of(new Authorities("ROLE_USER")));
-		user.setEnabled(true);
-		user.setPassword(encoder.encode(user.getPassword()));
-		user.setDateChange(new Date());
-		System.out.println(user);
-		userRepository.save(user);
-
-		return "redirect:/login?registerSuccess";
 	}
 
 	@InitBinder

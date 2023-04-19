@@ -134,9 +134,6 @@ textarea:focus {
 	width: 70%;
 	padding: 12px;
 	padding-bottom: 0px;
-	margin: 3% auto;
-	margin-top: 1%;
-	margin-bottom: 0px;
 	border: 1px solid hsla(0, 0%, 100%, .15);
 	border-radius: 2px;
 }
@@ -203,7 +200,6 @@ textarea:focus {
 	width: 65%;
 	padding: 50px;
 	margin-left: 150px;
-	margin-top: 1%;
 	background-color: #2a2727;
 	border: 1px solid hsla(0, 0%, 100%, .15);
 	border-radius: 6px 6px 0px 0px;

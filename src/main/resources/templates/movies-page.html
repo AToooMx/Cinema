@@ -15,7 +15,7 @@
 <body class="noselect mybody">
 	<div th:insert="/nav::navbar"></div>
 
-	<div class="wrapperMainPage mb-3">
+	<div class="wrapperMainPage mb-5 mt-3">
 		<div th:each="movie : ${movies}">
 			<a class="poster_fm"
 				th:href="@{${'movies/movie?movieId=' + movie.id}}"

@@ -2,11 +2,16 @@ package com.clevercinema.entity;
 
 import java.util.Date;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "Users")
@@ -17,20 +22,16 @@ public class Users {
     @Column(name = "User_ID")
     private int id;
     @Column(name = "Email")
-    @NotEmpty(message = "Поле не може бути пустим")
     private String email;
     @Column(name = "Password")
-    @NotEmpty(message = "Поле не може бути пустим")
     private String password;
     @Column(name = "Enabled")
     private boolean enabled;
     @Column(name = "Date_Change")
     private Date dateChange;
     @Column(name = "Name")
-    @NotEmpty(message = "Поле не може бути пустим")
     private String name;
     @Column(name = "Surname")
-    @NotEmpty(message = "Поле не може бути пустим")
     private String surname;
     @Column(name = "Bonuses")
     private int bonuse;

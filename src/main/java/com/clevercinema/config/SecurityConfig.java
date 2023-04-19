@@ -32,6 +32,7 @@ public class SecurityConfig {
                 .formLogin(form -> form
                         .loginPage("/login")
                         .usernameParameter("email")
+                        .defaultSuccessUrl("/movies")
                         .loginProcessingUrl("/process-login"))
                 .logout(logout -> logout
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout")))

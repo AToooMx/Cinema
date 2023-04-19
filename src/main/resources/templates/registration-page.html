@@ -16,46 +16,58 @@
 	<div th:insert="/nav::navbar"></div>
 
 	<div
-		class="bg-light bg-gradient p-3 col-4 mt-5 rounded container text-center border shadow-lg">
-		<form method="POST" th:action="@{/process-registration}">
+		class="bg-light bg-gradient p-3 col-4 mt-5 rounded container border shadow-lg">
+		<form method="POST" th:action="@{/process-registration}"
+			th:object="${user}">
 			<div class="form-group m-2">
-				<input type="email" name="email" class="form-control"
-					placeholder="E-mail (Обов'язково)" required autofocus />
+				<label class="exampleFormControlInput1 text-danger ps-1"
+					th:if="${#fields.hasErrors('email')}">Ваш Email
+				</label> <label class="text-dark ps-1" th:unless="${#fields.hasErrors('email')}"
+					for="exampleFormControlInput1">Ваш Email</label> <input
+					type="text" name="email" class="form-control"
+					placeholder="E-mail (Обов'язково)" th:field="*{email}" autofocus />
 			</div>
 			<div class="row">
 				<div class="form-group m-2 col">
-					<input type="text" name="name" class="form-control"
-						placeholder="Ім'я (Обов'язково)" required autofocus />
+					<label class="exampleFormControlInput1 text-danger ps-1"
+						th:if="${#fields.hasErrors('name')}">Ваше ім'я
+					</label> <label class="text-dark ps-1" th:unless="${#fields.hasErrors('name')}"
+						for="exampleFormControlInput1">Ваше ім'я </label> <input
+						type="text" name="name" class="form-control"
+						placeholder="Ім'я (Обов'язково)" th:field="*{name}" autofocus />
 				</div>
 				<div class="form-group m-2 col">
-					<input type="text" name="surname" class="form-control"
-						placeholder="Прізвище (Обов'язково)" required autofocus />
+					<label class="exampleFormControlInput1 text-danger ps-1"
+						th:if="${#fields.hasErrors('surname')}">Ваше прізвище
+					</label> <label class="text-dark ps-1" th:unless="${#fields.hasErrors('surname')}"
+						for="exampleFormControlInput1">Ваше прізвище </label> <input
+						type="text" name="surname" class="form-control"
+						placeholder="Прізвище (Обов'язково)" th:field="*{surname}"
+						autofocus />
 				</div>
 			</div>
 			<div class="form-group m-2">
+				<label class="text-dark ps-1" for="exampleFormControlInput1">Ваш номер телефону </label>
 				<input type="text" name="phone" class="form-control"
-					placeholder="Номер телефону (необов'язково)" />
+					placeholder="Номер телефону (необов'язково)" th:field="*{phone}"
+					autofocus />
 			</div>
 			<div class="form-group m-2">
+					<label class="exampleFormControlInput1 text-danger ps-1"
+						th:if="${#fields.hasErrors('surname')}">Пароль
+					</label> <label class="text-dark ps-1" th:unless="${#fields.hasErrors('surname')}"
+						for="exampleFormControlInput1">Пароль </label>
 				<input type="password" name="password" class="form-control"
-					placeholder="Пароль (Обов'язково)" required />
+					placeholder="Пароль (Обов'язково)" th:field="*{password}" />
 			</div>
-			<div class="form-group m-2">
+			<div class="form-group m-2 text-center">
 				<input type="submit" value="Зарєструватись" class="btn btn-primary" />
+			</div>
+			<div class="text-danger text-center" th:if="${param.emailError}">
+				<span class="text-danger">Користувач з таким E-mail вже існує</span>
 			</div>
 		</form>
 	</div>
 
-	<div
-		class="bg-light bg-gradient p-2 col-4 mt-2 rounded container text-center border shadow-lg"
-		th:if="${param.formError}">
-		<span class="text-danger">Помилка відправлення форми. Перевірте
-			введені дані та спробуйте повторно</span>
-	</div>
-	<div
-		class="bg-light bg-gradient p-2 col-4 mt-2 rounded container text-center border shadow-lg"
-		th:if="${param.emailError}">
-		<span class="text-danger">Користувач з таким E-mail вже існує</span>
-	</div>
 </body>
 </html>
