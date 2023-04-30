@@ -33,5 +33,11 @@ public class CommentServiceImpl implements CommentService {
 		commentDao.saveComment(comment);
 
 	}
+	
+	@Override
+	public void removeCommentById(int id) {
+		
+		commentDao.removeCommentById(id);
+	}
 
 }

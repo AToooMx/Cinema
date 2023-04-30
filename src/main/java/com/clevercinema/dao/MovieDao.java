@@ -23,4 +23,6 @@ public interface MovieDao {
 	List<Country> findAllCountryByMovieId(int id);
 
 	List<Studio> findAllStudioByMovieId(int id);
+
+	List<Genre> findAllGenre();
 }

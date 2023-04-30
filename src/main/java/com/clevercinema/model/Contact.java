@@ -9,6 +9,7 @@ public class Contact {
 	@NotBlank(message = "Вкажіть ваш Email")
 	@Email(message = "Вкажіть коректний Email")
 	private String email;
+	private String phone;
 	@NotBlank(message = "Вкажіть тему повідомлення")
 	private String title;
 	@NotBlank(message = "Введіть повідомлення")
@@ -44,6 +45,14 @@ public class Contact {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
 }

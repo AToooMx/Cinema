@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.clevercinema.model.Comment;
 
@@ -28,16 +29,25 @@ public class CommentDaoImpl implements CommentDao {
 		return comments;
 	}
 
+	@Transactional
 	@Override
 	public void saveComment(Comment comment) {
 
-		String sql = "INSERT INTO Comment (id_Movie, id_User, info, publication_date, is_hidden) VALUES (?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO Comment (id_Movie, id_User, info, is_hidden) VALUES (?, ?, ?, ?)";
 
-		Object[] args = { comment.getIdMovie(), comment.getIdUser(), comment.getInfo(), comment.getPublicationDate(),
-				comment.isHidden() };
+		Object[] args = { comment.getIdMovie(), comment.getIdUser(), comment.getInfo(), comment.isHidden() };
 
 		template.update(sql, args);
 
+	}
+
+	@Transactional
+	@Override
+	public void removeCommentById(int id) {
+		String sql = "DELETE FROM Comment WHERE id = ?";
+		
+		template.update(sql, id);
+		
 	}
 
 }

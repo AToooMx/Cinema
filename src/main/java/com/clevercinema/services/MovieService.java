@@ -2,6 +2,7 @@ package com.clevercinema.services;
 
 import java.util.List;
 
+import com.clevercinema.model.Genre;
 import com.clevercinema.model.Movie;
 
 public interface MovieService{
@@ -11,5 +12,7 @@ public interface MovieService{
 	List<Movie> getSoonMovieList();
 	
 	Movie findMovieById(int id);
+
+	List<Genre> getAllGenre();
 
 }

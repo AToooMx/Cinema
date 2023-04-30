@@ -24,9 +24,11 @@ public class SecurityConfig {
                 .authorizeHttpRequests
                         (auth -> auth
                          .antMatchers("/admin").hasAuthority("ROLE_ADMIN") 
+                         .antMatchers("/{id}/delete-comment/{commentId}").hasAuthority("ROLE_ADMIN")
                          .antMatchers("/login", "/registration", "/process-registration").permitAll()	 
-                         .antMatchers("/movies/movie/add-comment-process").authenticated() //Додавати коментарі може тільки авторизований користувач
+                         .antMatchers("/movies/{id}/add-comment-process").authenticated()
                          .antMatchers("/account", "/account/**").authenticated()
+                         .antMatchers("/movies/{id}/seance/{seanceId}/buy-ticket", "/movies/{id}/seance/{seanceId}/buy-ticket/process-buy-ticket").authenticated()
                          .anyRequest().permitAll())
                 .userDetailsService(myUserDetailsService)
                 .formLogin(form -> form

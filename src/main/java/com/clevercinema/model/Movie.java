@@ -1,5 +1,6 @@
 package com.clevercinema.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -15,7 +16,6 @@ public class Movie {
 	private String rentalPeriod;
 	private int duration;
 	private String photoName;
-	private String trailer;
 	private String description;
 	private List<Genre> genres;
 	private List<Producer> producers;
@@ -98,13 +98,6 @@ public class Movie {
 		this.photoName = photoName;
 	}
 
-	public String getTrailer() {
-		return trailer;
-	}
-
-	public void setTrailer(String trailer) {
-		this.trailer = trailer;
-	}
 
 	public String getRentalPeriod() {
 		return rentalPeriod;
@@ -151,7 +144,7 @@ public class Movie {
 	public String toString() {
 		return "Movie [id=" + id + ", title=" + title + ", originalTitle=" + originalTitle + ", age=" + age
 				+ ", language=" + language + ", startRental=" + startRental + ", endRental=" + endRental + ", duration="
-				+ duration + ", photoName=" + photoName + ", trailer=" + trailer + "]";
+				+ duration + ", photoName=" + photoName + "]";
 	}
 
 	public String getDescription() {
@@ -160,6 +153,10 @@ public class Movie {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	public String getStratRentalDate() {
+		return new SimpleDateFormat("yyyy-MM-dd").format(startRental);
 	}
 
 }

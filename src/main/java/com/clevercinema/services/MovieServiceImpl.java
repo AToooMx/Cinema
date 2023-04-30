@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.clevercinema.dao.MovieDao;
+import com.clevercinema.model.Genre;
 import com.clevercinema.model.Movie;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,6 +44,11 @@ public class MovieServiceImpl implements MovieService {
 		movie.setGenres(movieDao.findAllGenreByMovieId(id));
 		
 		return movie;
+	}
+
+	@Override
+	public List<Genre> getAllGenre() {
+		return movieDao.findAllGenre();
 	}
 
 }

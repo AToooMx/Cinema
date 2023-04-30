@@ -1,9 +1,14 @@
 package com.clevercinema.dto;
 
+import javax.validation.constraints.NotBlank;
+
 public class ChangePasswordDto {
 
+	@NotBlank(message = "Вкажіть старий пароль")
 	private String oldPassword;
+	@NotBlank(message = "Вкажіть новий пароль")
 	private String newPassword;
+	@NotBlank(message = "Повторіть новий пароль")
 	private String reNewPassword;
 
 	public ChangePasswordDto(String oldPassword, String newPassword, String reNewPassword) {

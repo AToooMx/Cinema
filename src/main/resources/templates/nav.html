@@ -14,14 +14,14 @@
 			<li sec:authorize="isAnonymous()">
 				<a href="/login">Вхід</a>
 				<ul class=" text-center">
-				 	<li class="border border-success"><a href="/registration">Реєстрація</a></li>
+				 	<li class="border"><a href="/registration">Реєстрація</a></li>
 				</ul>
 			</li>
-			<li sec:authorize="isAuthenticated()"><a href="/account/">Мій кабінет</a>
+			<li sec:authorize="isAuthenticated()"><a href="/profile/">Мій кабінет</a>
 				<ul class=" text-center">
-					<li class="border border-success"><a href="/account/history">Історія візитів</a></li>
-					<li class="border border-success"><a href="/account/changePassword">Змінити пароль</a></li>
-					<li class="border border-success"><a th:href="@{/logout}">Вихід</a></li>
+					<li class="border"><a href="/profile/history">Історія візитів</a></li>
+					<li class="border"><a href="/profile/changePassword">Змінити пароль</a></li>
+					<li class="border"><a th:href="@{/logout}">Вихід</a></li>
 				</ul>
 			</li>
 		</ul>

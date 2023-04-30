@@ -1,5 +1,6 @@
 package com.clevercinema.controllers;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,17 +16,22 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.clevercinema.dto.RegisterDto;
+import com.clevercinema.services.PlaceService;
 import com.clevercinema.services.UserService;
 
 @Controller
 public class LoginController {
 
 	@Autowired
-	private UserService UserService;
+	private UserService userService;
+	@Autowired
+	private PlaceService placeService;
 
 	@GetMapping("/login")
-	public String showLoginPage(Authentication authentication) {
+	public String showLoginPage(Authentication authentication, HttpSession session) {
 
+		placeService.cleanSessionTableBySessionId(session.getId());
+		
 		return authentication != null ? "redirect:/movies" : "login-page";
 
 	}
@@ -50,7 +56,7 @@ public class LoginController {
 			return "registration-page";
 		}
 
-		if (!UserService.save(userDto)) {
+		if (!userService.save(userDto)) {
 			return "redirect:/registration?emailError";
 		} else {
 			return "redirect:/login?registerSuccess";
