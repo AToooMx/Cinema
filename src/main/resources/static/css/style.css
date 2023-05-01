@@ -390,3 +390,16 @@ margin:auto;
     border-right:none;
     border-bottom:1px solid white;
 }
+
+.history_img{
+	width:160px;
+	height: 200px;
+	transform: scale(1);
+	transition: all 1s ease;
+}
+
+
+.history_img:hover {
+	transform: scale(1.03);
+	transition: all 1s ease;
+}

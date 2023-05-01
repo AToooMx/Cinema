@@ -25,7 +25,7 @@ public class MovieDaoImpl implements MovieDao {
 	public List<Movie> getCurrentlyMoviesStreaming() {
 
 		Date today = new Date();
-		String sql = "SELECT MovieID as 'id', Movie_Title as 'title', Photo_Name as 'photoName' FROM Movie WHERE End_Rental >= ? and Start_Rental<= ?";
+		String sql = "SELECT MovieID as 'id', Movie_Title as 'title', Photo_Name as 'photoName' FROM Movie WHERE End_Rental >= ? and Start_Rental<= ? order by Movie_Title";
 		Object[] args = { today, today };
 
 		List<Movie> movies = template.query(sql, new BeanPropertyRowMapper<Movie>(Movie.class), args);
@@ -58,7 +58,7 @@ public class MovieDaoImpl implements MovieDao {
 	@Override
 	public List<Genre> findAllGenreByMovieId(int id) {
 
-		String sql = "SELECT GenreID as id, GenreName as name FROM genre inner join filmgenre on GenreID = ID_Genre WHERE ID_Movie = ?";
+		String sql = "SELECT GenreID as id, GenreName as name FROM genre inner join filmgenre on GenreID = ID_Genre WHERE ID_Movie = ? order by GenreName";
 
 		List<Genre> genres = template.query(sql, new BeanPropertyRowMapper<Genre>(Genre.class), id);
 

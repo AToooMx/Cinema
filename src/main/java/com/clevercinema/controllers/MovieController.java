@@ -38,7 +38,7 @@ import com.clevercinema.services.CommentService;
 import com.clevercinema.services.MovieService;
 import com.clevercinema.services.PlaceService;
 import com.clevercinema.services.SeanceService;
-import com.clevercinema.services.UserService;
+import com.clevercinema.services.TicketService;
 
 @Controller
 @RequestMapping("/movies")
@@ -56,6 +56,8 @@ public class MovieController {
 	private PlaceService placeService;
 	@Autowired
 	private CinemaService cinemaService;
+	@Autowired
+	private TicketService ticketService;
 
 	@GetMapping("/{id}")
 	public String showMovie(@PathVariable("id") int id, Model model) {
@@ -183,13 +185,24 @@ public class MovieController {
 		
 		List<PickPlaceDto>pickPlaces = seanceService.findAllPickPlacesBySeanceAndSessionId(seanceId, session.getId());
 		Users user = userRepository.findByEmail(authentication.getName());
+		double sumAllTickets;
+		
 		if(payment.isUseBonuse()) {
-			
-			user.setBonuse(0);
-			userRepository.save(user);
 			pickPlaces.get(0).setPrice(pickPlaces.get(0).getPrice()-user.getBonuse());
+			sumAllTickets =  getSumAllTickets(pickPlaces);
+			user.setBonuse((int)(sumAllTickets/10));
+		}else {
+			sumAllTickets =  getSumAllTickets(pickPlaces);
+			user.setBonuse(user.getBonuse() + (int)(sumAllTickets/10));
 			
 		}
+		
+		userRepository.save(user);
+		
+		int userId = user.getId();
+		
+		ticketService.saveTicket(userId, pickPlaces);
+		placeService.cleanSessionTableBySessionId(session.getId());
 		
 		return "success-buy-ticket";
 	}

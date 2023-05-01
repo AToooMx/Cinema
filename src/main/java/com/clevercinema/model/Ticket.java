@@ -7,7 +7,6 @@ public class Ticket {
 	private int seanceId;
 	private int placeId;
 	private int userId;
-	private int employeeId;
 	private double cost;
 	private Date purchaseDate;
 
@@ -43,13 +42,6 @@ public class Ticket {
 		this.userId = userId;
 	}
 
-	public int getEmployeeId() {
-		return employeeId;
-	}
-
-	public void setEmployeeId(int employeeId) {
-		this.employeeId = employeeId;
-	}
 
 	public double getCost() {
 		return cost;

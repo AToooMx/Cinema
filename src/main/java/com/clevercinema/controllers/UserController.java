@@ -1,5 +1,7 @@
 package com.clevercinema.controllers;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +19,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.clevercinema.dto.ChangePasswordDto;
+import com.clevercinema.dto.TicketDto;
 import com.clevercinema.entity.Users;
 import com.clevercinema.repository.UserRepository;
+import com.clevercinema.services.TicketService;
 
 @Controller
 @RequestMapping("/profile")
@@ -28,6 +32,8 @@ public class UserController {
 	private PasswordEncoder encoder;
 	@Autowired
 	private UserRepository userRepository;
+	@Autowired
+	private TicketService ticketService;
 
 	@GetMapping("/")
 	public String showAccountPage() {
@@ -71,6 +77,17 @@ public class UserController {
 		} else {
 			return "redirect:/account/changePassword?passwordMismatch";
 		}
+	}
+	
+	@GetMapping("/history")
+	public String showHistoryPage(Model model, Authentication authentication) {
+		
+		Users user = userRepository.findByEmail(authentication.getName());
+		List<TicketDto> tickets = ticketService.findAllTicketsByUserId(user.getId());
+		
+		model.addAttribute("tickets", tickets);
+		
+		return "history-page";
 	}
 	
 	@InitBinder

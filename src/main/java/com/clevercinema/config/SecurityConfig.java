@@ -27,7 +27,7 @@ public class SecurityConfig {
                          .antMatchers("/{id}/delete-comment/{commentId}").hasAuthority("ROLE_ADMIN")
                          .antMatchers("/login", "/registration", "/process-registration").permitAll()	 
                          .antMatchers("/movies/{id}/add-comment-process").authenticated()
-                         .antMatchers("/account", "/account/**").authenticated()
+                         .antMatchers("/profile", "/profile/**").authenticated()
                          .antMatchers("/movies/{id}/seance/{seanceId}/buy-ticket", "/movies/{id}/seance/{seanceId}/buy-ticket/process-buy-ticket").authenticated()
                          .anyRequest().permitAll())
                 .userDetailsService(myUserDetailsService)
