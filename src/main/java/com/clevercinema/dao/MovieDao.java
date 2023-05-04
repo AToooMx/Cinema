@@ -2,11 +2,9 @@ package com.clevercinema.dao;
 
 import java.util.List;
 
-import com.clevercinema.model.Country;
-import com.clevercinema.model.Genre;
+import com.clevercinema.model.Age;
+import com.clevercinema.model.Language;
 import com.clevercinema.model.Movie;
-import com.clevercinema.model.Producer;
-import com.clevercinema.model.Studio;
 
 public interface MovieDao {
 
@@ -15,14 +13,12 @@ public interface MovieDao {
 	List<Movie> getSoonMovieList();
 
 	Movie findMovieById(int id);
+	
+	List<Movie> findAllMovie();
+	
+	List<Movie> findMoviesByTitle(String title);
 
-	List<Genre> findAllGenreByMovieId(int id);
+	List<Age> getAllAgeLimit();
 
-	List<Producer> findAllProducerByMovieId(int id);
-
-	List<Country> findAllCountryByMovieId(int id);
-
-	List<Studio> findAllStudioByMovieId(int id);
-
-	List<Genre> findAllGenre();
+	List<Language> getAllLanguage();
 }

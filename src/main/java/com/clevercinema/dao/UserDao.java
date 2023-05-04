@@ -1,18 +1,15 @@
-package com.clevercinema.services;
+package com.clevercinema.dao;
 
 import java.util.List;
 
-import com.clevercinema.dto.RegisterDto;
 import com.clevercinema.dto.UserDto;
 
-public interface UserService {
+public interface UserDao {
 
-	boolean save(RegisterDto userDto);
-	
 	List<UserDto> findAllUsersAndHesTickets();
 	
-	boolean deleteUserById(int id);
-	
+	void deleteUserById(int id);
+
 	void deleteRoleById(int id);
 
 	void addRoleByUserId(String authority, int id);

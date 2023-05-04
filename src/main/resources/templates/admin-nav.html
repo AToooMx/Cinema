@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.thymeleaf.org "
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<div th:fragment="navbar">
+	<nav class="MainMenu">
+		<ul>
+			<li><a href="/admin/movies">Фільми</a></li>
+			<li><a href="/admin/users">Користувачі</a></li>
+			<li><a href="/admin/statistics">Статистика</a></li>
+			<li><a href="/">Кінотеатр</a></li>
+		</ul>
+	</nav>
+</div>

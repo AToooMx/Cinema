@@ -9,8 +9,8 @@ public class Movie {
 	private int id;
 	private String title;
 	private String originalTitle;
-	private int age;
-	private String language;
+	private Age age;
+	private Language language;
 	private Date startRental;
 	private Date endRental;
 	private String rentalPeriod;
@@ -50,19 +50,19 @@ public class Movie {
 		this.originalTitle = originalTitle;
 	}
 
-	public int getAge() {
+	public Age getAge() {
 		return age;
 	}
 
-	public void setAge(int age) {
+	public void setAge(Age age) {
 		this.age = age;
 	}
 
-	public String getLanguage() {
+	public Language getLanguage() {
 		return language;
 	}
 
-	public void setLanguage(String language) {
+	public void setLanguage(Language language) {
 		this.language = language;
 	}
 
@@ -98,7 +98,6 @@ public class Movie {
 		this.photoName = photoName;
 	}
 
-
 	public String getRentalPeriod() {
 		return rentalPeriod;
 	}
@@ -107,7 +106,24 @@ public class Movie {
 		this.rentalPeriod = rentalPeriod;
 	}
 
-	public String getGenres() {
+
+	public List<Producer> getProducers() {
+		return producers;
+	}
+
+	public List<Studio> getStudios() {
+		return studios;
+	}
+
+	public List<Country> getCountries() {
+		return countries;
+	}
+
+	public List<Genre> getGenres() {
+		return genres;
+	}
+
+	public String getAllGenres() {
 
 		return genres.toString().replace("[", "").replace("]", "");
 	}
@@ -116,7 +132,7 @@ public class Movie {
 		this.genres = genres;
 	}
 
-	public String getProducers() {
+	public String getAllProducers() {
 		return producers.toString().replace("[", "").replace("]", "");
 	}
 
@@ -124,7 +140,7 @@ public class Movie {
 		this.producers = producers;
 	}
 
-	public String getStudios() {
+	public String getAllStudios() {
 		return studios.toString().replace("[", "").replace("]", "");
 	}
 
@@ -132,7 +148,7 @@ public class Movie {
 		this.studios = studios;
 	}
 
-	public String getCountries() {
+	public String getAllCountries() {
 		return countries.toString().replace("[", "").replace("]", "");
 	}
 
@@ -154,7 +170,7 @@ public class Movie {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
 	public String getStratRentalDate() {
 		return new SimpleDateFormat("yyyy-MM-dd").format(startRental);
 	}

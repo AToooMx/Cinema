@@ -24,6 +24,9 @@
 					<li class="border"><a th:href="@{/logout}">Вихід</a></li>
 				</ul>
 			</li>
+			<li sec:authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_ROOT')">
+				<a href="/admin">Адмін панель</a>
+			</li>
 		</ul>
 	</nav>
 </div>

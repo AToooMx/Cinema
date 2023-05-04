@@ -16,7 +16,7 @@
 <meta charset="UTF-8">
 <title th:text=${movie.title}></title>
 </head>
-<body class="noselect mybody">
+<body class="mybody">
 	<div th:insert="/nav::navbar"></div>
 	<div class="container-fluid">
 		<div class="row mb-5">
@@ -66,29 +66,29 @@
 									<span class="val" th:text="${movie.rentalPeriod}"></span>
 								</div>
 								<div class="mt-1">
-									<span class="val" th:text="${movie.age}"></span><span
+									<span class="val" th:text="${movie.age.age}"></span><span
 										class="val">+</span>
 								</div>
 								<div class="mt-1 ">
 									<span class="val" th:text="${movie.originalTitle}"></span>
 								</div>
 								<div class="mt-1">
-									<span class="val" th:text="${movie.language}"></span>
+									<span class="val" th:text="${movie.language.language}"></span>
 								</div>
 								<div class="mt-1">
 									<span class="val" th:text="${movie.duration}"></span><span class="val"> хв.</span>
 								</div>
 								<div class="mt-1">
-									<span class="val" th:text="${movie.genres}"></span>
+									<span class="val" th:text="${movie.allGenres}"></span>
 								</div>
 								<div class="mt-1">
-									<span class="val" th:text="${movie.countries}"></span>
+									<span class="val" th:text="${movie.allCountries}"></span>
 								</div>
 								<div class="mt-1">
-									<span class="val" th:text="${movie.producers}"></span>
+									<span class="val" th:text="${movie.allProducers}"></span>
 								</div>
 								<div class="mt-1">
-									<span class="val" th:text="${movie.studios}"></span>
+									<span class="val" th:text="${movie.allStudios}"></span>
 								</div>
 							</div>
 						</div>

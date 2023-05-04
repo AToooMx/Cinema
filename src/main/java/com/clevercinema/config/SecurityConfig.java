@@ -23,7 +23,8 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests
                         (auth -> auth
-                         .antMatchers("/admin").hasAuthority("ROLE_ADMIN") 
+                         .antMatchers("/admin/users/{id}/delete").hasAuthority("ROLE_ROOT") 
+                         .antMatchers("/admin", "/admin/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_ROOT") 
                          .antMatchers("/{id}/delete-comment/{commentId}").hasAuthority("ROLE_ADMIN")
                          .antMatchers("/login", "/registration", "/process-registration").permitAll()	 
                          .antMatchers("/movies/{id}/add-comment-process").authenticated()
@@ -49,8 +50,3 @@ public class SecurityConfig {
 	}
 
 }
-
-/*
- * .antMatchers("/admin").hasAuthority("ADMIN") .antMatchers("/login",
- * "/registration", "/process-registration").permitAll()
- */

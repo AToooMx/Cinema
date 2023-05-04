@@ -36,18 +36,7 @@ public class MainController {
 	@Autowired
 	private EmailService emailService;
 
-	@GetMapping("")
-	public String showPage() {
-
-		return "redirect:/movies";
-	}
-
-	@GetMapping("/")
-	public String showHomePage() {
-		return "redirect:movies";
-	}
-
-	@GetMapping("/movies")
+	@GetMapping(value = {"", "/", "/movies"})
 	public String showMoviesPage(Model model, HttpSession session) {
 
 		placeService.cleanSessionTableBySessionId(session.getId());

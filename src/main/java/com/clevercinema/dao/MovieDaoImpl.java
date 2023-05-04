@@ -8,11 +8,9 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.clevercinema.model.Country;
-import com.clevercinema.model.Genre;
+import com.clevercinema.model.Age;
+import com.clevercinema.model.Language;
 import com.clevercinema.model.Movie;
-import com.clevercinema.model.Producer;
-import com.clevercinema.model.Studio;
 import com.clevercinema.rowmapper.MovieRowMapper;
 
 @Repository
@@ -48,7 +46,7 @@ public class MovieDaoImpl implements MovieDao {
 	@Override
 	public Movie findMovieById(int id) {
 
-		String sql = "SELECT MovieID, Movie_Title, Original_Title, filmagelimit.age, filmlanguage.language, Start_Rental, End_Rental, duration, photo_name, description FROM movie inner join filmlanguage on ID_Language = LanguageID inner join filmagelimit on id_age = ageId WHERE MovieID = ?";
+		String sql = "SELECT MovieID, Movie_Title, Original_Title, filmagelimit.AgeId, filmagelimit.age,filmlanguage.languageid, filmlanguage.language, Start_Rental, End_Rental, duration, photo_name, description FROM movie inner join filmlanguage on ID_Language = LanguageID inner join filmagelimit on id_age = ageId WHERE MovieID = ?";
 
 		Movie movie = template.queryForObject(sql, new MovieRowMapper(), id);
 
@@ -56,49 +54,40 @@ public class MovieDaoImpl implements MovieDao {
 	}
 
 	@Override
-	public List<Genre> findAllGenreByMovieId(int id) {
+	public List<Movie> findAllMovie() {
 
-		String sql = "SELECT GenreID as id, GenreName as name FROM genre inner join filmgenre on GenreID = ID_Genre WHERE ID_Movie = ? order by GenreName";
+		String sql = "SELECT MovieID as 'id', Movie_Title as 'title'FROM Movie";
 
-		List<Genre> genres = template.query(sql, new BeanPropertyRowMapper<Genre>(Genre.class), id);
+		List<Movie> movies = template.query(sql, new BeanPropertyRowMapper<Movie>(Movie.class));
 
-		return genres;
+		return movies;
 	}
 
 	@Override
-	public List<Producer> findAllProducerByMovieId(int id) {
-		String sql = "SELECT ProducerID as id, Producer as name FROM producer inner join filmproducer on ProducerID = ID_Producer WHERE ID_Movie = ?";
+	public List<Movie> findMoviesByTitle(String title) {
+		String sql = "SELECT MovieID as 'id', Movie_Title as 'title', Original_title as 'originalTitle' FROM Movie WHERE Movie_Title like ? or Original_Title like ?";
 
-		List<Producer> producers = template.query(sql, new BeanPropertyRowMapper<Producer>(Producer.class), id);
+		List<Movie> movies = template.query(sql, new BeanPropertyRowMapper<Movie>(Movie.class), title, title);
 
-		return producers;
+		return movies;
 	}
 
 	@Override
-	public List<Country> findAllCountryByMovieId(int id) {
-		String sql = "SELECT CountryID as id, Country as name FROM country inner join filmcountry on CountryID = ID_Country WHERE ID_Movie = ?";
+	public List<Age> getAllAgeLimit() {
+		String sql = "SELECT AgeID as 'id', Age FROM filmagelimit";
 
-		List<Country> countries = template.query(sql, new BeanPropertyRowMapper<Country>(Country.class), id);
+		List<Age> ageList = template.query(sql, new BeanPropertyRowMapper<Age>(Age.class));
 
-		return countries;
+		return ageList;
 	}
 
 	@Override
-	public List<Studio> findAllStudioByMovieId(int id) {
-		String sql = "SELECT StudioID as id, Studio as name FROM studio inner join filmstudio on StudioID = ID_Studio WHERE ID_Movie = ?";
+	public List<Language> getAllLanguage() {
+		String sql = "SELECT LanguageID as 'id', Language FROM filmlanguage";
 
-		List<Studio> studios = template.query(sql, new BeanPropertyRowMapper<Studio>(Studio.class), id);
+		List<Language> languageList = template.query(sql, new BeanPropertyRowMapper<Language>(Language.class));
 
-		return studios;
-	}
-
-	@Override
-	public List<Genre> findAllGenre() {
-		String sql = "SELECT GenreId as 'id', GenreName as 'name' FROM Genre";
-		
-		List<Genre> genres = template.query(sql, new BeanPropertyRowMapper<Genre>(Genre.class));
-		
-		return genres;
+		return languageList;
 	}
 
 }

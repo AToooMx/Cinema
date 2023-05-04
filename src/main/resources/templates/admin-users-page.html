@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.thymeleaf.org "
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<link href="/css/style.css" rel="stylesheet" />
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<meta charset="UTF-8">
+<title>Admin users page</title>
+</head>
+<body class="noselect">
+	<div th:insert="/admin-nav::navbar"></div>
+	<div class="container">
+		<div class="bg-light bg-gradient rounded m-5 p-3 shadow-lg border">
+
+			<div class="w-100 text-center border-bottom">
+				<h3>Users</h3>
+			</div>
+			<table border="1" class="table table-striped text-center shadow">
+				<thead>
+					<tr>
+						<td>ID</td>
+						<td>Email</td>
+						<td>Name</td>
+						<td>Surname</td>
+						<td>Bonuses</td>
+						<td>Count ticket</td>
+						<td>Sum spend money</td>
+						<td>Roles</td>
+						<td sec:authorize="hasAuthority('ROLE_ROOT')">Delete</td>
+						<!-- <td>Delete movie</td> -->
+					</tr>
+				</thead>
+				<tr th:each="user : ${users}">
+					<td th:text="${user.id}"></td>
+					<td th:text="${user.email}"></td>
+					<td th:text="${user.name}"></td>
+					<td th:text="${user.surname}"></td>
+					<td th:text="${user.bonuses}"></td>
+					<td th:text="${user.countTickets}"></td>
+					<td th:text="${user.sumSpendMoney}"></td>
+					<td><a th:href="@{${'/admin/users/' + user.id + '/roles/'}}" class="btn btn-primary">Roles</a></td>
+					<td sec:authorize="hasAuthority('ROLE_ROOT')"><a th:href="@{${'/admin/users/' + user.id + '/delete/'}}" class="btn btn-danger">Delete</a></td>
+				</tr>
+			</table>
+
+		</div>
+	</div>
+</body>
+</html>
