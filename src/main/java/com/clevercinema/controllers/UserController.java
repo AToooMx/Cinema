@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.security.core.Authentication;
@@ -26,14 +27,12 @@ import com.clevercinema.services.TicketService;
 
 @Controller
 @RequestMapping("/profile")
+@AllArgsConstructor
 public class UserController {
 
-	@Autowired
-	private PasswordEncoder encoder;
-	@Autowired
-	private UserRepository userRepository;
-	@Autowired
-	private TicketService ticketService;
+	private final PasswordEncoder encoder;
+	private final UserRepository userRepository;
+	private final TicketService ticketService;
 
 	@GetMapping("/")
 	public String showAccountPage() {

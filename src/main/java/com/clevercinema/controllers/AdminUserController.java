@@ -2,11 +2,9 @@ package com.clevercinema.controllers;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
@@ -20,28 +18,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.clevercinema.dto.AuthorityDto;
-import com.clevercinema.dto.SearchDto;
 import com.clevercinema.dto.UserDto;
 import com.clevercinema.entity.Users;
-import com.clevercinema.model.Country;
-import com.clevercinema.model.Genre;
-import com.clevercinema.model.Movie;
-import com.clevercinema.model.Producer;
-import com.clevercinema.model.Studio;
 import com.clevercinema.repository.UserRepository;
-import com.clevercinema.services.MovieService;
 import com.clevercinema.services.UserService;
 
-@RequestMapping("/admin")
+@RequestMapping("/admin/users")
 @Controller
 @AllArgsConstructor
-public class AdminController {
+public class AdminUserController {
 
 	private final UserService userService;
 	private final UserRepository userRepository;
 
 
-	@GetMapping("/users")
+	@GetMapping
 	public String showAllUsers(Model model) {
 
 		List<UserDto> users = userService.findAllUsersAndHesTickets();
@@ -50,7 +41,7 @@ public class AdminController {
 		return "admin-users-page";
 	}
 
-	@GetMapping("/users/{id}/roles")
+	@GetMapping("{id}/roles")
 	public String showAllUserRoles(@PathVariable("id") int id, Model model) {
 
 		Users user = userRepository.findById(id).get();
@@ -60,7 +51,7 @@ public class AdminController {
 		return "admin-user-roles-page";
 	}
 
-	@GetMapping("/users/{id}/roles/{roleId}/delete")
+	@GetMapping("{id}/roles/{roleId}/delete")
 	public String deleteRoleProcess(@PathVariable("id") int id, @PathVariable("roleId") int roleId, Model model) {
 
 		userService.deleteRoleById(roleId);
@@ -68,7 +59,7 @@ public class AdminController {
 		return "redirect:/admin/users/" + id + "/roles";
 	}
 
-	@PostMapping("/users/{id}/roles/add")
+	@PostMapping("{id}/roles/add")
 	public String addRoleProcess(@PathVariable("id") int id, @ModelAttribute("authority") AuthorityDto authorityDto) {
 		System.out.println(authorityDto);
 		userService.addRoleByUserId(authorityDto.getRole(), id);
@@ -76,30 +67,14 @@ public class AdminController {
 		return "redirect:/admin/users/" + id + "/roles";
 	}
 
-	@GetMapping("/users/{id}/delete/")
+	@GetMapping("{id}/delete/")
 	public String deleteUserProcess(@PathVariable("id") int id) {
 
 		userService.deleteUserById(id);
 
 		return "redirect:/admin/users";
 	}
-	
 
-	@InitBinder
-	public void initBinder(WebDataBinder binder) {
-		StringTrimmerEditor editor = new StringTrimmerEditor(true);
-		binder.registerCustomEditor(String.class, "title", editor);
-		binder.registerCustomEditor(String.class, "originalTitle", editor);
-		binder.registerCustomEditor(String.class, "duration", editor);
-		binder.registerCustomEditor(String.class, "photoName", editor);
-		binder.registerCustomEditor(String.class, "description", editor);
-		binder.registerCustomEditor(String.class, "name", editor);
-		
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		CustomDateEditor customDateEditor = new CustomDateEditor(dateFormat, true);
-		binder.registerCustomEditor(Date.class, "startRental", customDateEditor);
-		binder.registerCustomEditor(Date.class, "endRental", customDateEditor);
-	}
 	
 	
 }

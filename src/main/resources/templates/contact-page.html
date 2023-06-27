@@ -24,27 +24,27 @@
 				class="ms-3 me-3 mb-3 mt-3" th:object=${contact}>
 				
 				<div class="form-group mt-2">
-					<label class="text-danger ps-1" th:if="${#fields.hasErrors('name')}">Ваше ім'я*</label>
+					<label class="text-danger ps-1" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></label>
 					<label class="ps-1" th:unless="${#fields.hasErrors('name')}" for="exampleFormControlInput1">Ваше ім'я*</label> 
 					<input type="text" class="form-control" th:field="*{name}">
 				</div>
 				<div class="form-group mt-3">
-					<label class="text-danger ps-1" th:if="${#fields.hasErrors('email')}">Ваш Email*</label>
+					<label class="text-danger ps-1" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></label>
 					<label class="ps-1" th:unless="${#fields.hasErrors('email')}" for="exampleFormControlInput1">Ваш Email*</label> 
 					<input type="text" class="form-control" th:field="*{email}">
 				</div>
 				<div class="form-group mt-3">
-					<label class="text-danger ps-1" th:if="${#fields.hasErrors('phone')}">Ваш номер телефону*</label>
+					<label class="text-danger ps-1" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></label>
 					<label class="ps-1" th:unless="${#fields.hasErrors('phone')}" for="exampleFormControlInput1">Ваш Номер телефону</label> 
 					<input type="text" class="form-control" th:field="*{phone}">
 				</div>
 				<div class="form-group mt-3">
-					<label class="text-danger ps-1" th:if="${#fields.hasErrors('title')}">Тема*</label>
+					<label class="text-danger ps-1" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></label>
 					<label class="ps-1" th:unless="${#fields.hasErrors('title')}" for="exampleFormControlInput1">Тема*</label> 
 					<input type="text" class="form-control" th:field="*{title}">
 				</div>
 				<div class="form-group mt-3">
-					<label class="text-danger ps-1" th:if="${#fields.hasErrors('message')}">Ваше запитання*</label>
+					<label class="text-danger ps-1" th:if="${#fields.hasErrors('message')}" th:errors="*{message}"></label>
 					<label class="ps-1" th:unless="${#fields.hasErrors('message')}" for="exampleFormControlInput1">Ваше запитання*</label>
 					<textarea class="form-control" rows="5" th:field="*{message}"></textarea>
 				</div>

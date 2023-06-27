@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.security.core.Authentication;
@@ -42,24 +43,18 @@ import com.clevercinema.services.TicketService;
 
 @Controller
 @RequestMapping("/movies")
+@AllArgsConstructor
 public class MovieController {
 
-	@Autowired
-	private MovieService movieService;
-	@Autowired
-	private SeanceService seanceService;
-	@Autowired
-	private UserRepository userRepository;
-	@Autowired
-	private CommentService commentService;
-	@Autowired
-	private PlaceService placeService;
-	@Autowired
-	private CinemaService cinemaService;
-	@Autowired
-	private TicketService ticketService;
+	private final MovieService movieService;
+	private final SeanceService seanceService;
+	private final UserRepository userRepository;
+	private final CommentService commentService;
+	private final PlaceService placeService;
+	private final CinemaService cinemaService;
+	private final TicketService ticketService;
 
-	@GetMapping("/{id}")
+	@GetMapping("{id}")
 	public String showMovie(@PathVariable("id") int id, Model model) {
 
 		Movie movie = movieService.findMovieById(id);
@@ -80,7 +75,7 @@ public class MovieController {
 
 	}
 
-	@PostMapping("/{id}/add-comment-process")
+	@PostMapping("{id}/add-comment-process")
 	public String addComment(@PathVariable("id") int id, @Valid Comment comment, BindingResult result,
 			Authentication authentication) {
 
@@ -96,7 +91,7 @@ public class MovieController {
 		return "redirect:/movies/" + comment.getIdMovie();
 	}
 
-	@PostMapping("/{id}/delete-comment/{commentId}")
+	@PostMapping("{id}/delete-comment/{commentId}")
 	public String deleteComment(@PathVariable("commentId") int commentId, @PathVariable("id") int id) {
 
 		commentService.removeCommentById(commentId);
@@ -104,7 +99,7 @@ public class MovieController {
 		return "redirect:/movies/" + id;
 	}
 
-	@GetMapping("/{id}/seance/{seanceId}")
+	@GetMapping("{id}/seance/{seanceId}")
 	public String showSeancePage(@PathVariable("seanceId") int seanceId, @PathVariable("id") int id, Model model,
 			HttpSession session, Authentication authentication) {
 
@@ -133,7 +128,7 @@ public class MovieController {
 		return "seance-page";
 	}
 
-	@PostMapping("/{id}/seance/{seanceId}/pick-seat")
+	@PostMapping("{id}/seance/{seanceId}/pick-seat")
 	public String pickSeat(@PathVariable("seanceId") int seanceId, @PathVariable("id") int id,
 			@RequestParam("seatId") int seatId, HttpSession session) {
 
@@ -142,7 +137,7 @@ public class MovieController {
 		return "redirect:/movies/" + id + "/seance/" + seanceId;
 	}
 
-	@GetMapping("/{id}/seance/{seanceId}/buy-ticket")
+	@GetMapping("{id}/seance/{seanceId}/buy-ticket")
     public String showBuyTicketPage(@PathVariable("seanceId") int seanceId, @PathVariable("id") int id, @ModelAttribute("bonuseDto") BonuseDto bonuse, HttpSession session, Model model,  Authentication authentication) {
     	List<PickPlaceDto>pickPlaces = seanceService.findAllPickPlacesBySeanceAndSessionId(seanceId, session.getId());
     	
@@ -176,7 +171,7 @@ public class MovieController {
         return "buy-ticket-page";
     }
 	
-	@PostMapping("/{id}/seance/{seanceId}/buy-ticket/process-buy-ticket")
+	@PostMapping("{id}/seance/{seanceId}/buy-ticket/process-buy-ticket")
 	public String processBuyTicket(@PathVariable("seanceId") int seanceId, @PathVariable("id") int id, @Valid @ModelAttribute("payment") PaymentDto payment, BindingResult result, HttpSession session, Authentication authentication) {
 		
 		if(result.hasErrors()) {

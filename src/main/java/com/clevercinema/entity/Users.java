@@ -57,6 +57,11 @@ public class Users {
         this.enabled = true;
     }
 
+    public void addAuthorities(Authorities authority){
+        authority.setUsers(this);
+        authorities.add(authority);
+    }
+
     public int getId() {
         return id;
     }

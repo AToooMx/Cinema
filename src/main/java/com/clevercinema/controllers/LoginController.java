@@ -3,6 +3,7 @@ package com.clevercinema.controllers;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.security.core.Authentication;
@@ -20,12 +21,11 @@ import com.clevercinema.services.PlaceService;
 import com.clevercinema.services.UserService;
 
 @Controller
+@AllArgsConstructor
 public class LoginController {
 
-	@Autowired
-	private UserService userService;
-	@Autowired
-	private PlaceService placeService;
+	private final UserService userService;
+	private final PlaceService placeService;
 
 	@GetMapping("/login")
 	public String showLoginPage(Authentication authentication, HttpSession session) {

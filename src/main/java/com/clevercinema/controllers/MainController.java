@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
@@ -26,15 +27,12 @@ import com.clevercinema.services.MovieService;
 import com.clevercinema.services.PlaceService;
 
 @Controller
+@AllArgsConstructor
 public class MainController {
-	@Autowired
-	private MovieService movieService;
-	@Autowired
-	private FAQService FAQService;
-	@Autowired
-	private PlaceService placeService;
-	@Autowired
-	private EmailService emailService;
+	private final MovieService movieService;
+	private final FAQService FAQService;
+	private final PlaceService placeService;
+	private final EmailService emailService;
 
 	@GetMapping(value = {"", "/", "/movies"})
 	public String showMoviesPage(Model model, HttpSession session) {
